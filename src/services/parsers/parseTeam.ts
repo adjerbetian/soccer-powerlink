@@ -32,7 +32,7 @@ function parseTeamMember(dto: any): TeamMember {
         shirtNumber: parser.parseNumber("shirtNumber", { null: true }),
         position: parser.parseString("position", { null: true }),
         role: parser.parseString("role"),
-        dateOfBirth: parser.parseString("dateOfBirth"),
+        dateOfBirth: parser.parseDate("dateOfBirth", { null: true }),
         countryOfBirth: parser.parseString("countryOfBirth"),
         nationality: parser.parseString("nationality"),
     };

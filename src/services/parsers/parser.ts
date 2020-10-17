@@ -5,6 +5,8 @@ interface Parser {
     parseNumber(field: string, options: { null: true }): number | null;
     parseString(field: string): string;
     parseString(field: string, options: { null: true }): string | null;
+    parseDate(field: string): Date;
+    parseDate(field: string, options: { null: true }): Date | null;
 }
 export function buildParser(dto: any): Parser {
     return {
@@ -13,6 +15,11 @@ export function buildParser(dto: any): Parser {
         },
         parseString(field: string, options?: { null: boolean }): any {
             return parseType(field, "string", options);
+        },
+        parseDate(field: string, options?: { null: boolean }): any {
+            const value = parseType(field, "string", options);
+            if (value === null) return null;
+            return new Date(value);
         },
     };
 

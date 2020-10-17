@@ -11,7 +11,7 @@ export interface TeamMember {
     id: number;
     name: string;
     position: string | null;
-    dateOfBirth: string;
+    dateOfBirth: Date | null;
     countryOfBirth: string;
     nationality: string;
     shirtNumber: number | null;

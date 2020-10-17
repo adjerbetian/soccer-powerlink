@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 import { teamService } from "../services";
 import { TeamSummary } from "../entities";
 
@@ -22,7 +23,11 @@ export function TeamsPage() {
                 <tbody>
                     {teams.map((team) => (
                         <tr key={team.id}>
-                            <td>{team.name}</td>
+                            <td>
+                                <Link to={`/teams/${team.id}`}>
+                                    {team.name}
+                                </Link>
+                            </td>
                             <td>{team.founded ? team.founded : "-"}</td>
                             <td>{team.address}</td>
                         </tr>
