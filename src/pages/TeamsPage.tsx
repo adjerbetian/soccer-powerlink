@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { teamService } from "../services";
-import { Team } from "../entities";
+import { TeamSummary } from "../entities";
 
 export function TeamsPage() {
-    const [teams, setTeams] = useState<Team[]>([]);
+    const [teams, setTeams] = useState<TeamSummary[]>([]);
     useEffect(() => {
         teamService.fetchTeams().then((teams) => setTeams(teams));
     }, []);

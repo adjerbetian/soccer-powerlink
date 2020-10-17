@@ -2,11 +2,18 @@ export interface Team {
     id: number;
     name: string;
     address: string;
-    founded: number | null;
     website: string;
+    founded: number | null;
     crestUrl: string;
-    area: {
-        id: number;
-        name: string;
-    };
+    squad: TeamMember[];
+}
+export interface TeamMember {
+    id: number;
+    name: string;
+    position: string | null;
+    dateOfBirth: string;
+    countryOfBirth: string;
+    nationality: string;
+    shirtNumber: number | null;
+    role: string;
 }
