@@ -19,4 +19,15 @@ header {
 main {
     max-width: 900px;
     margin: auto;
+    padding: 40px;
+}
+footer {
+    background-color: #391500;
+    color: white;
+
+    & > div {
+        max-width: 900px;
+        margin: auto;
+        padding: 40px;
+    }
 }

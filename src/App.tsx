@@ -23,6 +23,7 @@ export function App() {
                         <Route path="/teams/:id" component={TeamPage} />
                     </Switch>
                 </main>
+                <Footer />
             </Router>
         </div>
     );
@@ -34,12 +35,23 @@ function Header() {
             <div className="no-mobile right">
                 <img
                     src="https://www.powerlink.co.il/imgs/logofull.png"
-                    alt="PowerLink CRM"
+                    alt="Powerlink CRM"
                 />
             </div>
             <h1>
                 <Link to="/">Soccer App</Link>
             </h1>
         </header>
+    );
+}
+function Footer() {
+    return (
+        <footer>
+            <div>
+                <p style={{ textAlign: "center" }}>
+                    created by Alexandre Djerbetian for Powerlink CRM
+                </p>
+            </div>
+        </footer>
     );
 }
