@@ -3,4 +3,5 @@ export interface TeamSummary {
     name: string;
     founded: number | null;
     address: string;
+    crestUrl: string;
 }

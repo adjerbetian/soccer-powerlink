@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import "./TeamsPage.scss";
 import { teamService } from "../services";
 import { TeamSummary } from "../entities";
 import { Loader } from "../component";
@@ -24,11 +25,11 @@ export function TeamsPage() {
     }
     return (
         <div>
-            <h1>Teams</h1>
+            <h1>List of Soccer Teams</h1>
             <table>
                 <thead>
                     <tr>
-                        <th>Name</th>
+                        <th colSpan={2}>Name</th>
                         <th>Founded</th>
                         <th>Address</th>
                     </tr>
@@ -36,6 +37,13 @@ export function TeamsPage() {
                 <tbody>
                     {teams.map((team) => (
                         <tr key={team.id}>
+                            <td>
+                                <img
+                                    src={team.crestUrl}
+                                    alt={`${team.name} - logo`}
+                                    height={15}
+                                />
+                            </td>
                             <td>
                                 <Link to={`/teams/${team.id}`}>
                                     {team.name}
