@@ -30,14 +30,13 @@ export function buildParser<T>(dto: T): Parser<T> {
     ) {
         const value = _.get(dto, field);
         if (options?.null && value === null) return null;
-        if (typeof value !== type) throw new ParseError(field);
+        if (typeof value !== type) throw new ParseError(dto, field);
         return value;
     }
 }
 
-export class APIError extends Error {}
 export class ParseError extends Error {
-    constructor(public field: string) {
-        super();
+    constructor(public dto: any, public field: string) {
+        super(`Error while parsing ${field} with value ${_.get(dto, field)}`);
     }
 }

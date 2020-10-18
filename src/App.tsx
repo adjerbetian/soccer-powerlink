@@ -1,6 +1,6 @@
 import React from "react";
 import "./App.scss";
-import { TeamPage, TeamsPage } from "./pages";
+import { NotFoundPage, TeamPage, TeamsPage } from "./pages";
 import {
     BrowserRouter as Router,
     Route,
@@ -21,6 +21,7 @@ export function App() {
                         </Route>
                         <Route path="/teams" exact component={TeamsPage} />
                         <Route path="/teams/:id" component={TeamPage} />
+                        <Route path="**" component={NotFoundPage} />
                     </Switch>
                 </main>
                 <Footer />

@@ -7,4 +7,5 @@ export const config = {
         id: 2001, // champions league,
         year: 2020,
     },
+    dev: true, // for errors
 };

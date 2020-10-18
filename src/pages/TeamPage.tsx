@@ -1,7 +1,12 @@
 import React, { useEffect, useState } from "react";
 import { RouteComponentProps } from "react-router-dom";
 import "./TeamPage.scss";
-import { ExternalLinkTo, Loader, TeamCrest } from "../component";
+import {
+    ErrorComponent,
+    ExternalLinkTo,
+    Loader,
+    TeamCrest,
+} from "../component";
 import { teamService } from "../services";
 import { Team } from "../entities";
 
@@ -11,10 +16,12 @@ export function TeamPage({
     },
 }: RouteComponentProps<{ id: string }>) {
     const [team, setTeam] = useState<Team | null>(null);
+    const [error, setError] = useState<Error | null>(null);
     useEffect(() => {
         fetchTeam(parseInt(id));
     }, [id]);
 
+    if (error) return <ErrorComponent error={error} />;
     if (!team) return <Loader />;
     return (
         <div>
@@ -24,8 +31,12 @@ export function TeamPage({
     );
 
     async function fetchTeam(id: number) {
-        const team = await teamService.fetchTeam(id);
-        setTeam(team);
+        try {
+            const team = await teamService.fetchTeam(id);
+            setTeam(team);
+        } catch (err) {
+            setError(err);
+        }
     }
 }
 function TeamDetails({ team }: { team: Team }) {
@@ -53,7 +64,7 @@ function TeamDetails({ team }: { team: Team }) {
                     </tr>
                     <tr>
                         <th>Coach</th>
-                        <td>{team.coach.name}</td>
+                        <td>{team.coach?.name || "-"}</td>
                     </tr>
                 </tbody>
             </table>
@@ -65,12 +76,19 @@ function TeamPlayers({ team }: { team: Team }) {
         <section>
             <h2>Players</h2>
             <table>
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Position</th>
+                        <th>Number</th>
+                    </tr>
+                </thead>
                 <tbody>
                     {team.players.map((player) => (
                         <tr key={player.id}>
                             <td>{player.name}</td>
                             <td>{player.position}</td>
-                            <td>{player.shirtNumber}</td>
+                            <td>{player.shirtNumber || "-"}</td>
                         </tr>
                     ))}
                 </tbody>

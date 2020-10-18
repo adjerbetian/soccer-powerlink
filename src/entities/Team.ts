@@ -4,9 +4,9 @@ export interface Team {
     address: string;
     website: string | null;
     founded: number | null;
-    crestUrl: string;
+    crestUrl: string | null;
     players: TeamPlayer[];
-    coach: TeamCoach;
+    coach: TeamCoach | null;
 }
 export interface TeamPlayer {
     id: number;

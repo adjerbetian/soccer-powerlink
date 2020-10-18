@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import "./TeamsPage.scss";
 import { teamService } from "../services";
 import { TeamSummary } from "../entities";
-import { Loader, TeamCrest } from "../component";
+import { ErrorComponent, Loader, TeamCrest } from "../component";
 
 export function TeamsPage() {
     return (
@@ -15,11 +15,13 @@ export function TeamsPage() {
 }
 function TeamList() {
     const [teams, setTeams] = useState<TeamSummary[]>([]);
+    const [error, setError] = useState<Error | null>(null);
     const [loading, setLoading] = useState(true);
     useEffect(() => {
         fetchTeams();
     }, []);
 
+    if (error) return <ErrorComponent error={error} />;
     if (loading) return <Loader />;
     return (
         <table>
@@ -48,8 +50,12 @@ function TeamList() {
     );
 
     async function fetchTeams() {
-        const teams = await teamService.fetchTeams();
-        setTeams(teams);
-        setLoading(false);
+        try {
+            const teams = await teamService.fetchTeams();
+            setTeams(teams);
+            setLoading(false);
+        } catch (err) {
+            setError(err);
+        }
     }
 }

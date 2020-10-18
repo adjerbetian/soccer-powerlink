@@ -1,33 +1,44 @@
-header {
-    background-color: beige;
-    padding: 30px;
+$footer-height: 100px;
 
-    & > * {
-        margin: 0;
-    }
+.App {
+    position: relative;
+    min-height: calc(100vh - #{$footer-height});
+    padding-bottom: $footer-height;
 
-    h1 {
-        text-align: center;
-    }
-    .left {
-        float: left;
-    }
-    .right {
-        float: right;
-    }
-}
-main {
-    max-width: 900px;
-    margin: auto;
-    padding: 40px;
-}
-footer {
-    background-color: #391500;
-    color: white;
+    header {
+        background-color: beige;
+        padding: 30px;
 
-    & > div {
+        & > * {
+            margin: 0;
+        }
+
+        h1 {
+            text-align: center;
+        }
+        .left {
+            float: left;
+        }
+        .right {
+            float: right;
+        }
+    }
+    main {
         max-width: 900px;
         margin: auto;
         padding: 40px;
+    }
+    footer {
+        background-color: #391500;
+        color: white;
+        height: $footer-height;
+        position: absolute;
+        bottom: 0;
+        width: 100%;
+
+        & > div {
+            max-width: 900px;
+            margin: auto;
+        }
     }
 }
