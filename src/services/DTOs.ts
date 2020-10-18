@@ -1,3 +1,8 @@
+export interface TeamsDTO {
+    count: number;
+    filters: any[];
+    teams: TeamSummaryDTO[];
+}
 export interface TeamSummaryDTO {
     id: number;
     area: {
@@ -5,6 +10,7 @@ export interface TeamSummaryDTO {
         name: string;
     };
     name: string;
+    crestUrl: string;
     shortName: string;
     tla: string;
     address: string;
@@ -24,6 +30,7 @@ export interface TeamDTO {
         name: string;
     };
     name: string;
+    crestUrl: string;
     shortName: string;
     tla: string;
     address: string;
@@ -44,13 +51,4 @@ interface TeamMemberDTO {
     countryOfBirth: string;
     nationality: string;
     role: string;
-}
-export interface PlayerDTO {
-    id: number;
-    name: string;
-    position: string;
-    dateOfBirth: string;
-    countryOfBirth: string;
-    nationality: string;
-    lastUpdated: string;
 }

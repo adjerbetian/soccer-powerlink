@@ -1,7 +1,9 @@
 import { TeamSummary } from "../../entities";
-import { APIError, buildParser, json, ParseError } from "./parser";
+import { APIError, buildParser, ParseError } from "./parser";
+import { TeamSummaryDTO } from "../DTOs";
+import { json } from "../utils";
 
-export function parseTeamSummary(dto: any): TeamSummary {
+export function parseTeamSummary(dto: TeamSummaryDTO): TeamSummary {
     const parser = buildParser(dto);
 
     try {

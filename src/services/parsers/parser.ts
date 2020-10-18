@@ -1,22 +1,22 @@
 import _ from "lodash";
 
-interface Parser {
-    parseNumber(field: string): number;
-    parseNumber(field: string, options: { null: true }): number | null;
-    parseString(field: string): string;
-    parseString(field: string, options: { null: true }): string | null;
-    parseDate(field: string): Date;
-    parseDate(field: string, options: { null: true }): Date | null;
+interface Parser<T> {
+    parseNumber(field: keyof T): number;
+    parseNumber(field: keyof T, options: { null: true }): number | null;
+    parseString(field: keyof T): string;
+    parseString(field: keyof T, options: { null: true }): string | null;
+    parseDate(field: keyof T): Date;
+    parseDate(field: keyof T, options: { null: true }): Date | null;
 }
-export function buildParser(dto: any): Parser {
+export function buildParser<T>(dto: T): Parser<T> {
     return {
-        parseNumber(field: string, options?: { null: boolean }): any {
+        parseNumber(field: keyof T, options?: { null: boolean }): any {
             return parseType(field, "number", options);
         },
-        parseString(field: string, options?: { null: boolean }): any {
+        parseString(field: keyof T, options?: { null: boolean }): any {
             return parseType(field, "string", options);
         },
-        parseDate(field: string, options?: { null: boolean }): any {
+        parseDate(field: keyof T, options?: { null: boolean }): any {
             const value = parseType(field, "string", options);
             if (value === null) return null;
             return new Date(value);
@@ -24,8 +24,8 @@ export function buildParser(dto: any): Parser {
     };
 
     function parseType(
-        field: string,
-        type: string,
+        field: keyof T,
+        type: "string" | "number",
         options?: { null: boolean }
     ) {
         const value = _.get(dto, field);
@@ -33,9 +33,6 @@ export function buildParser(dto: any): Parser {
         if (typeof value !== type) throw new ParseError(field);
         return value;
     }
-}
-export function json(x: any) {
-    return JSON.stringify(x, null, 4);
 }
 
 export class APIError extends Error {}

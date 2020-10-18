@@ -1,7 +1,9 @@
 import { Team, TeamCoach, TeamPlayer } from "../../entities";
-import { APIError, buildParser, json, ParseError } from "./parser";
+import { APIError, buildParser, ParseError } from "./parser";
+import { TeamDTO } from "../DTOs";
+import { json } from "../utils";
 
-export function parseTeam(dto: any): Team {
+export function parseTeam(dto: TeamDTO): Team {
     const parser = buildParser(dto);
 
     try {
