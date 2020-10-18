@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import "./TeamsPage.scss";
 import { teamService } from "../services";
 import { TeamSummary } from "../entities";
-import { Loader } from "../component";
+import { Loader, TeamCrest } from "../component";
 
 export function TeamsPage() {
     const [teams, setTeams] = useState<TeamSummary[]>([]);
@@ -38,11 +38,7 @@ export function TeamsPage() {
                     {teams.map((team) => (
                         <tr key={team.id}>
                             <td>
-                                <img
-                                    src={team.crestUrl}
-                                    alt={`${team.name} - logo`}
-                                    height={15}
-                                />
+                                <TeamCrest team={team} height={15} />
                             </td>
                             <td>
                                 <Link to={`/teams/${team.id}`}>

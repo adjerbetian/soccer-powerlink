@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { RouteComponentProps } from "react-router-dom";
 import "./TeamPage.scss";
-import { Loader } from "../component";
+import { Loader, TeamCrest } from "../component";
 import { teamService } from "../services";
 import { Team } from "../entities";
 
@@ -30,13 +30,8 @@ function TeamDetails({ team }: { team: Team }) {
     return (
         <section className="team-details">
             <div className="team-header">
-                <h1>{team?.name}</h1>
-                <img
-                    className="logo"
-                    src={team?.crestUrl}
-                    alt={team?.name}
-                    height={80}
-                />
+                <h1>{team.name}</h1>
+                <TeamCrest team={team} height={80} />
             </div>
             <table className="team-infos">
                 <tbody>
@@ -51,7 +46,13 @@ function TeamDetails({ team }: { team: Team }) {
                     <tr>
                         <th>Website</th>
                         <td>
-                            <a href={team.website}>{team.website}</a>
+                            <a
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                href={team.website}
+                            >
+                                {team.website}
+                            </a>
                         </td>
                     </tr>
                     <tr>
@@ -65,16 +66,19 @@ function TeamDetails({ team }: { team: Team }) {
 }
 function TeamPlayers({ team }: { team: Team }) {
     return (
-        <table>
-            <tbody>
-                {team.players.map((player) => (
-                    <tr key={player.id}>
-                        <td>{player.name}</td>
-                        <td>{player.position}</td>
-                        <td>{player.shirtNumber}</td>
-                    </tr>
-                ))}
-            </tbody>
-        </table>
+        <section>
+            <h2>Players</h2>
+            <table>
+                <tbody>
+                    {team.players.map((player) => (
+                        <tr key={player.id}>
+                            <td>{player.name}</td>
+                            <td>{player.position}</td>
+                            <td>{player.shirtNumber}</td>
+                        </tr>
+                    ))}
+                </tbody>
+            </table>
+        </section>
     );
 }

@@ -10,7 +10,7 @@ export function parseTeamSummary(dto: any): TeamSummary {
             name: parser.parseString("name"),
             address: parser.parseString("address"),
             founded: parser.parseNumber("founded", { null: true }),
-            crestUrl: parser.parseString("crestUrl"),
+            crestUrl: parser.parseString("crestUrl", { null: true }),
         };
     } catch (err) {
         if (err instanceof ParseError) {
