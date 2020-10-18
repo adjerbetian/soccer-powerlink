@@ -1,4 +1,4 @@
-import { Team, TeamMember } from "../../entities";
+import { Team, TeamCoach, TeamPlayer } from "../../entities";
 import { APIError, buildParser, json, ParseError } from "./parser";
 
 export function parseTeam(dto: any): Team {
@@ -12,7 +12,12 @@ export function parseTeam(dto: any): Team {
             crestUrl: parser.parseString("crestUrl"),
             founded: parser.parseNumber("founded", { null: true }),
             website: parser.parseString("website"),
-            squad: (dto.squad as any[]).map(parseTeamMember),
+            players: (dto.squad as any[])
+                .filter((m) => m.role === "PLAYER")
+                .map(parseTeamPlayer),
+            coach: parseTeamCoach(
+                (dto.squad as any[]).find((m: any) => m.role === "COACH")
+            ),
         };
     } catch (err) {
         if (err instanceof ParseError) {
@@ -23,7 +28,7 @@ export function parseTeam(dto: any): Team {
         throw err;
     }
 }
-function parseTeamMember(dto: any): TeamMember {
+function parseTeamPlayer(dto: any): TeamPlayer {
     const parser = buildParser(dto);
 
     return {
@@ -31,7 +36,17 @@ function parseTeamMember(dto: any): TeamMember {
         name: parser.parseString("name"),
         shirtNumber: parser.parseNumber("shirtNumber", { null: true }),
         position: parser.parseString("position", { null: true }),
-        role: parser.parseString("role"),
+        dateOfBirth: parser.parseDate("dateOfBirth", { null: true }),
+        countryOfBirth: parser.parseString("countryOfBirth"),
+        nationality: parser.parseString("nationality"),
+    };
+}
+function parseTeamCoach(dto: any): TeamCoach {
+    const parser = buildParser(dto);
+
+    return {
+        id: parser.parseNumber("id"),
+        name: parser.parseString("name"),
         dateOfBirth: parser.parseDate("dateOfBirth", { null: true }),
         countryOfBirth: parser.parseString("countryOfBirth"),
         nationality: parser.parseString("nationality"),

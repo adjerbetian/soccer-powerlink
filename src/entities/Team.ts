@@ -5,15 +5,22 @@ export interface Team {
     website: string;
     founded: number | null;
     crestUrl: string;
-    squad: TeamMember[];
+    players: TeamPlayer[];
+    coach: TeamCoach;
 }
-export interface TeamMember {
+export interface TeamPlayer {
     id: number;
     name: string;
     position: string | null;
+    shirtNumber: number | null;
     dateOfBirth: Date | null;
     countryOfBirth: string;
     nationality: string;
-    shirtNumber: number | null;
-    role: string;
+}
+export interface TeamCoach {
+    id: number;
+    name: string;
+    dateOfBirth: Date | null;
+    countryOfBirth: string;
+    nationality: string;
 }

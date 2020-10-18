@@ -1,2 +1,2 @@
-export type { TeamSummary } from "./TeamSummary";
-export type { Team, TeamMember } from "./Team";
+export * from "./TeamSummary";
+export * from "./Team";
