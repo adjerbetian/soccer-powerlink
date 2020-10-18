@@ -1,0 +1,22 @@
+header {
+    background-color: beige;
+    padding: 30px;
+
+    & > * {
+        margin: 0;
+    }
+
+    h1 {
+        text-align: center;
+    }
+    .left {
+        float: left;
+    }
+    .right {
+        float: right;
+    }
+}
+main {
+    max-width: 900px;
+    margin: auto;
+}
