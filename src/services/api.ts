@@ -1,12 +1,11 @@
-// https://www.football-data.org/
-const API_URL = "http://api.football-data.org/v2";
+import { config } from "../config";
 
 export const api = {
     async get<T>(uri: string): Promise<T> {
         console.log("GET", uri);
-        return fetch(`${API_URL}${uri}`, {
+        return fetch(`${config.api.url}${uri}`, {
             headers: {
-                "X-Auth-Token": "d1d5777708c3493c975c23212962ef06",
+                "X-Auth-Token": config.api.key,
             },
         }).then((response) => response.json());
     },

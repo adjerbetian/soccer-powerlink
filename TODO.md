@@ -4,5 +4,4 @@
 - [ ] use styled components
 - [ ] test cypress
 - [ ] add unit tests on the services
-- [ ] extract config file
 - [ ] error handling from API
