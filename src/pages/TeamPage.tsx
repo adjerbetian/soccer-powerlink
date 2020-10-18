@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { RouteComponentProps } from "react-router-dom";
 import "./TeamPage.scss";
-import { Loader, TeamCrest } from "../component";
+import { ExternalLinkTo, Loader, TeamCrest } from "../component";
 import { teamService } from "../services";
 import { Team } from "../entities";
 
@@ -12,18 +12,20 @@ export function TeamPage({
 }: RouteComponentProps<{ id: string }>) {
     const [team, setTeam] = useState<Team | null>(null);
     useEffect(() => {
-        teamService.fetchTeam(parseInt(id)).then((team) => setTeam(team));
+        fetchTeam(parseInt(id));
     }, [id]);
 
-    if (!team) {
-        return <Loader />;
-    } else {
-        return (
-            <div>
-                <TeamDetails team={team} />
-                <TeamPlayers team={team} />
-            </div>
-        );
+    if (!team) return <Loader />;
+    return (
+        <div>
+            <TeamDetails team={team} />
+            <TeamPlayers team={team} />
+        </div>
+    );
+
+    async function fetchTeam(id: number) {
+        const team = await teamService.fetchTeam(id);
+        setTeam(team);
     }
 }
 function TeamDetails({ team }: { team: Team }) {
@@ -46,16 +48,7 @@ function TeamDetails({ team }: { team: Team }) {
                     <tr>
                         <th>Website</th>
                         <td>
-                            {(team.website && (
-                                <a
-                                    target="_blank"
-                                    rel="noopener noreferrer"
-                                    href={team.website}
-                                >
-                                    {team.website}
-                                </a>
-                            )) ||
-                                "-"}
+                            <ExternalLinkTo url={team.website} />
                         </td>
                     </tr>
                     <tr>
