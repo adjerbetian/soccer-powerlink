@@ -46,13 +46,16 @@ function TeamDetails({ team }: { team: Team }) {
                     <tr>
                         <th>Website</th>
                         <td>
-                            <a
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                href={team.website}
-                            >
-                                {team.website}
-                            </a>
+                            {(team.website && (
+                                <a
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    href={team.website}
+                                >
+                                    {team.website}
+                                </a>
+                            )) ||
+                                "-"}
                         </td>
                     </tr>
                     <tr>

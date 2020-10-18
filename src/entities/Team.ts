@@ -2,7 +2,7 @@ export interface Team {
     id: number;
     name: string;
     address: string;
-    website: string;
+    website: string | null;
     founded: number | null;
     crestUrl: string;
     players: TeamPlayer[];

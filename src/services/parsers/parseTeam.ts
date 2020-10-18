@@ -11,7 +11,7 @@ export function parseTeam(dto: any): Team {
             address: parser.parseString("address"),
             crestUrl: parser.parseString("crestUrl"),
             founded: parser.parseNumber("founded", { null: true }),
-            website: parser.parseString("website"),
+            website: parser.parseString("website", { null: true }),
             players: (dto.squad as any[])
                 .filter((m) => m.role === "PLAYER")
                 .map(parseTeamPlayer),
