@@ -1,15 +1,13 @@
 import { api } from "./api";
 import { parseTeamSummary, parseTeam } from "./parsers";
+import { config } from "../config";
 import { Team, TeamSummary } from "../entities";
 import { TeamDTO, TeamsDTO } from "./DTOs";
-
-const CHAMPIONS_LEAGUE_ID = 2001;
-const CURRENT_YEAR = new Date().getFullYear();
 
 export const teamService = {
     async fetchTeams(): Promise<TeamSummary[]> {
         const body = await api.get<TeamsDTO>(
-            `/competitions/${CHAMPIONS_LEAGUE_ID}/teams?season=${CURRENT_YEAR}`
+            `/competitions/${config.competition.id}/teams?season=${config.competition.year}`
         );
         return body.teams.map((dto) => parseTeamSummary(dto));
     },
